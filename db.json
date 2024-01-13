@@ -1,147 +1,18 @@
 {
-  "login": [
+  "starboards": [
     {
-      "email": "user@example.com",
-      "password": "123",
-      "id": "1dd5"
+      "id": 1,
+      "date": "json-server",
+      "title": "typicode",
+      "name": "json-server",
+      "context": "typicode"
     },
     {
-      "id": "2f9a",
-      "email": "123123",
-      "password": "123123123"
-    },
-    {
-      "id": "7b12",
-      "email": "123123",
-      "password": "12312312"
-    },
-    {
-      "id": "80a3",
-      "email": "12312",
-      "password": "123123"
-    },
-    {
-      "id": "1c7e",
-      "email": "123",
-      "password": "123"
-    },
-    {
-      "id": "eb0d",
-      "email": "`12",
-      "password": "`12"
-    },
-    {
-      "id": "fe5d",
-      "email": "123",
-      "password": "123"
-    },
-    {
-      "id": "130b",
-      "email": "qweqwe",
-      "password": "qwewqewe"
-    }
-  ],
-  "signup": [
-    {
-      "name": "ㅇㅇㅇ",
-      "password": "123123123",
-      "email": "123123",
-      "major": "R반",
-      "id": "8fb7"
-    },
-    {
-      "id": "6b28",
-      "name": "ㅊㅌㄴㅁㅇㅁㄴ",
-      "password": "asdasd",
-      "email": "ㅊㅁㄴㅇ",
-      "major": ""
-    },
-    {
-      "id": "6000",
-      "name": "123",
-      "password": "123",
-      "email": "123",
-      "major": "S반"
-    },
-    {
-      "id": "7f40",
-      "name": "ㅂㅈㄷㅂㅈ",
-      "password": "qwewe",
-      "email": "ㅂㅈㄷㅂㅈㄷ",
-      "major": "S반"
-    },
-    {
-      "id": "ac2c",
-      "userid": "id22",
-      "name": "123",
-      "password": "123",
-      "email": "123",
-      "major": "S반"
-    },
-    {
-      "id": "id22",
-      "name": "123",
-      "password": "123",
-      "email": "123",
-      "major": "S반"
-    },
-    {
-      "id": "a826",
-      "userid": "id42",
-      "name": "11",
-      "password": "1111",
-      "email": "11",
-      "major": "S반"
-    },
-    {
-      "id": "ce63",
-      "userid": "id76",
-      "name": "123",
-      "password": "123123",
-      "email": "123123",
-      "major": "N반"
-    },
-    {
-      "id": "id116",
-      "name": "12312",
-      "password": "123",
-      "email": "1231231",
-      "major": "N반"
-    },
-    {
-      "id": "b046",
-      "name": "123",
-      "password": "123",
-      "email": "123",
-      "major": "R반"
-    },
-    {
-      "id": "95ef",
-      "name": "123123",
-      "password": "12312312",
-      "email": "12312",
-      "major": "default"
-    },
-    {
-      "id": "4a88",
-      "name": "ㅁㄴㅇ",
-      "password": "Dlswogus0812!",
-      "email": "ㅁㄴㅇㅁㄴㅇ",
-      "major": "R반"
-    },
-    {
-      "id": "b815",
-      "name": "ㅋㅌㅊㅋㅌㅊ",
-      "password": "Dlswogus0815!",
-      "email": "asdasd@asdasd.com",
-      "major": "S반"
-    },
-    {
-      "id": "40a8",
-      "name": "qweqwe",
-      "password": "Dlsowgus!",
-      "email": "qweqwe@nasasd.com",
-      "major": "R반"
+      "id": "5f67",
+      "date": "2024-01-13",
+      "title": "x",
+      "name": "vc",
+      "context": "b"
     }
   ]
 }
