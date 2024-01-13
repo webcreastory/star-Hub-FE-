@@ -15,12 +15,11 @@ import StShrDetail from './pages/starsharepages/StShrDetail';
 import StShrModal from './pages/starsharepages/StShrModal';
 
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        // homepages 구성
+        {/* homepages 구성 */}
         <Route path='/' element={<Login />} />
         <Route path='signup' element={<SignUp />} />
         <Route path='mypage' element={<Mypage />} />
