@@ -25,11 +25,11 @@ function App() {
         <Route path='signup' element={<SignUp />} />
         <Route path='mypage' element={<Mypage />} />
         <Route path='myprofile' element={<MyProfile />} />
-        <Route path='Password' element={<Password />} />
+        <Route path='password' element={<Password />} />
         // starhubpages 구성
         <Route path='starhub' element={<StarHub />} />
-        <Route path='Starboard' element={<StarBoard />} />
-        <Route path='StHubdetail' element={<StHubDetail />} />
+        <Route path='starboards' element={<StarBoard />} />
+        <Route path='sthubdetail' element={<StHubDetail />} />
         // starsharepages 구성
         <Route path='starshare' element={<StarShare />} />
         <Route path='stshrdetail' element={<StShrDetail />} />
