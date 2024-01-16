@@ -27,7 +27,8 @@ function StarHub() {
 
     const starHubValue = async () => {
         try {
-            const { data } = await api.get(`/starboards`);
+            const { data } = await api.get(`/api/starhubs`);
+            console.log('ddddd', data ) 
             setDatas(data);
         } catch (error) {
             console.error('Error fetching data:', error);

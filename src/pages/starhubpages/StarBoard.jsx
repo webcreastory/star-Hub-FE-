@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/api';
 import styled from 'styled-components';
+import axios from 'axios';
 
 function StarBoard() {
+    const a = async () => {
+        const response = await axios.get('http://15.164.222.205:8080/api/starhubs/1');
+        console.log(response);
+        return response;
+    };
+
     const Navigate = useNavigate();
 
     const [boardid, setBoardId] = useState();
@@ -45,6 +52,11 @@ function StarBoard() {
             }
         }
     };
+
+    useEffect(() => {
+        a();
+    }, []);
+    
 
     return (
         <>

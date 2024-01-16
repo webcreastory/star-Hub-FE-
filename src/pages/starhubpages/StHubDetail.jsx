@@ -27,8 +27,8 @@ function StHubDetail(props) {
     const selectedItem = location.state?.selectedItem || null;
 
     const starHubValue = async () => {
+        // const { data } = await api.get(`api/starboards/${boardId}`);
         const { data } = await api.get(`/starboards`);
-        console.log('++++', data);
         setDatas(data);
     };
 
@@ -47,7 +47,7 @@ function StHubDetail(props) {
             title: selectedItem.title,
             imageUrl: selectedItem.imageUrl,
             name: selectedItem.name,
-            major: selectedItem.major,
+
             date: selectedItem.date,
             contents: selectedItem.contents,
         });
@@ -78,7 +78,7 @@ function StHubDetail(props) {
             ...prevEditedItem,
             imageUrl: editedItem.imageUrl,
             name: editedItem.name,
-            major: editedItem.major,
+            title: editedItem.title,
             date: editedItem.date,
             contents: editedItem.contents,
         }));
