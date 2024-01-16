@@ -19,6 +19,11 @@ import StShrModal from './pages/starsharepages/StShrModal';
 const queryClient = new QueryClient();
 
 function App() {
+  const handleStarBoardDataUpdate = (updatedItem) => {
+    // 여기에 실제로 데이터를 업데이트하는 로직을 작성하세요
+    console.log('스타 보드 데이터 업데이트:', updatedItem);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -29,10 +34,13 @@ function App() {
           <Route path='mypage' element={<Mypage />} />
           <Route path='myprofile' element={<MyProfile />} />
           <Route path='password' element={<Password />} />
-        {/* // starhubpages 구성 */}
-          <Route path='starhub' element={<StarHub />} />
-          <Route path='starboards' element={<StarBoard />} />
-          <Route path='sthubdetail' element={<StHubDetail />} />
+        {/* starhubpages 구성 */}
+        <Route path='starhub' element={<StarHub updateStarBoardData={handleStarBoardDataUpdate} />} />
+        <Route path='starboards' element={<StarBoard />} />
+        <Route
+          path='sthubdetail'
+          element={<StHubDetail updateStarBoardData={handleStarBoardDataUpdate} />}
+        />
         {/* // starsharepages 구성 */}
           <Route path='starshare' element={<StarShare />} />
           <Route path='/starshare/:id' element={<StShrDetail />} />
