@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Login from './pages/homepages/Login';
 import SignUp from './pages/homepages/SignUp';
 import Mypage from './pages/homepages/Mypage';
@@ -14,8 +14,12 @@ import StarShare from './pages/starsharepages/StarShare';
 import StShrDetail from './pages/starsharepages/StShrDetail';
 import StShrModal from './pages/starsharepages/StShrModal';
 
-
 function App() {
+  const handleStarBoardDataUpdate = (updatedItem) => {
+    // 여기에 실제로 데이터를 업데이트하는 로직을 작성하세요
+    console.log('스타 보드 데이터 업데이트:', updatedItem);
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -25,11 +29,14 @@ function App() {
         <Route path='mypage' element={<Mypage />} />
         <Route path='myprofile' element={<MyProfile />} />
         <Route path='password' element={<Password />} />
-        // starhubpages 구성
-        <Route path='starhub' element={<StarHub />} />
+        {/* starhubpages 구성 */}
+        <Route path='starhub' element={<StarHub updateStarBoardData={handleStarBoardDataUpdate} />} />
         <Route path='starboards' element={<StarBoard />} />
-        <Route path='sthubdetail' element={<StHubDetail />} />
-        // starsharepages 구성
+        <Route
+          path='sthubdetail'
+          element={<StHubDetail updateStarBoardData={handleStarBoardDataUpdate} />}
+        />
+        {/* starsharepages 구성 */}
         <Route path='starshare' element={<StarShare />} />
         <Route path='stshrdetail' element={<StShrDetail />} />
         <Route path='stshrmodal' element={<StShrModal />} />

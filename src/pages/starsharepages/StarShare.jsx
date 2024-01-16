@@ -29,6 +29,7 @@ function StarShare() {
             </StarShareHeaderButton>
           </div>
         </StarShareHeader>
+        
         <StarShareContentsBox>
           <StarShareContentsBoxImg>
             <span>링크 대표이미지</span>
