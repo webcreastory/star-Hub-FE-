@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 function Navbar() {
-  const navigate = useNavigate();
+
+const navigate = useNavigate();
 
   const navigateToMain = () => {
     navigate('/');
@@ -14,7 +15,7 @@ function Navbar() {
   };
 
   const navigateToMyPage = () => {
-    navigate('/mypage');
+    navigate(`/mypage`);
   };
 
   const navigateToSignup = () => {
@@ -50,6 +51,7 @@ function Navbar() {
         alignItems: 'center',
         justifyContent: 'space-between',
         borderBottom: '1px solid black',
+        backgroundColor :'white',
       }}>
         <div style={{
           display: 'flex',
