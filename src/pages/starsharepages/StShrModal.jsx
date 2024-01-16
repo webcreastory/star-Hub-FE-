@@ -1,48 +1,90 @@
 import React from 'react'
+import { useMutation,useQueryClient } from 'react-query'
+import { postDatas } from '../../api/auth'
 import styled from 'styled-components'
+import useInput from './hooks/useInput'
 
-function StShrModal({handlerModalState}) {
+
+function StShrModal({ handlerModalState }) {
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(postDatas, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getDatas")
+    }
+  })
+
+  const [title, InputTitleValue] = useInput()
+  const [name, InputNameValue] = useInput()
+  const [contents, InputContentsValue] = useInput()
+  const [url, InputUrlValue] = useInput()
+
+  const addStarShare = () => {
+    const newStarShare = {
+      title,
+      name: "최우식",
+      contents,
+      url,
+      major: "R반"
+    }
+    mutation.mutate(newStarShare)
+    handlerModalState()
+    
+  }
+
   return (
-    <StarShareModalBack>
+    <>
+      <StarShareModalBack onClick={handlerModalState}>
+      </StarShareModalBack>
+
       <StarShareModalForm>
-        <StarShareModalHeader>
-          스타쉐어 추가하기
-        </StarShareModalHeader>
-        
-        <StarShareModalInputBox>
-          <StarShareModalInputBoxText>
-          제목
-          </StarShareModalInputBoxText>
-          <StarShareModalInput/>
-        </StarShareModalInputBox>
-        
-        <StarShareModalInputBox>
-          <StarShareModalInputBoxText>
-          작성자
-          </StarShareModalInputBoxText>
-          <StarShareModalInput/>
-        </StarShareModalInputBox>
-        
-        <StarShareModalInputBox>
-          <StarShareModalInputBoxText>
-          내용
-          </StarShareModalInputBoxText>
-          <StarShareModalInput2/>
-        </StarShareModalInputBox>
+        <StarShareModalContents>
+          <StarShareModalHeader>
+            스타쉐어 추가하기
+          </StarShareModalHeader>
 
-        <StarShareModalInputBox>
-          <StarShareModalInputBoxText>
-          링크
-          </StarShareModalInputBoxText>
-          <StarShareModalInput/>
-        </StarShareModalInputBox>
-        
-        <StarShareModalButton onClick = {handlerModalState}>
-          저장하기
-        </StarShareModalButton>
+          <StarShareModalInputBox>
+            <StarShareModalInputBoxText>
+              제목
+            </StarShareModalInputBoxText>
+            <StarShareModalInput
+              type="text"
+              placeholder='제목을 입력해주세요'
+              value={title}
+              onChange={InputTitleValue}
+            />
+          </StarShareModalInputBox>
 
+          <StarShareModalInputBox>
+            <StarShareModalInputBoxText>
+              내용
+            </StarShareModalInputBoxText>
+            <StarShareModalInput2
+              type="text"
+              placeholder='내용을 입력해주세요'
+              value={contents}
+              onChange={InputContentsValue}
+            />
+          </StarShareModalInputBox>
+
+          <StarShareModalInputBox>
+            <StarShareModalInputBoxText>
+              링크
+            </StarShareModalInputBoxText>
+            <StarShareModalInput
+              type="text"
+              placeholder='링크를 입력해주세요'
+              value={url}
+              onChange={InputUrlValue}
+            />
+          </StarShareModalInputBox>
+
+          <StarShareModalButton onClick={addStarShare}>
+            저장하기
+          </StarShareModalButton>
+        </StarShareModalContents>
       </StarShareModalForm>
-    </StarShareModalBack>
+    </>
   )
 }
 
@@ -60,15 +102,16 @@ const StarShareModalBack = styled.div`
 `
 
 const StarShareModalForm = styled.div`
+  position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`
+const StarShareModalContents = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 
   width: 500px;
   padding: 30px;
@@ -102,16 +145,22 @@ const StarShareModalInputBoxText = styled.div`
 const StarShareModalInput = styled.input`
   width: 100%;
   height: 30px;
-
+  border: 1px solid gray;
   border-radius: 10px;
 `
 
-const StarShareModalInput2 = styled.input`
+const StarShareModalInput2 = styled.textarea`
   margin-top: 5px;
   width: 100%;
   height: 200px;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 200px;
 
+  max-height: 200px;
+  border: 1px solid gray;
   border-radius: 10px;
+  
 `
 
 const StarShareModalButton = styled.button`
