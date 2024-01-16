@@ -25,15 +25,15 @@ function App() {
         <Route path='mypage' element={<Mypage />} />
         <Route path='myprofile' element={<MyProfile />} />
         <Route path='password' element={<Password />} />
-        // starhubpages 구성
+        {/* // starhubpages 구성 */}
         <Route path='starhub' element={<StarHub />} />
         <Route path='starboards' element={<StarBoard />} />
         <Route path='sthubdetail' element={<StHubDetail />} />
-        // starsharepages 구성
+        {/* // starsharepages 구성 */}
         <Route path='starshare' element={<StarShare />} />
         <Route path='stshrdetail' element={<StShrDetail />} />
         <Route path='stshrmodal' element={<StShrModal />} />
-      </Routes>
+        </Routes>
     </BrowserRouter>
   );
 }
