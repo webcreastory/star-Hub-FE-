@@ -26,7 +26,6 @@ function StShrModal({ handlerModalState }) {
   })
 
   const [title, InputTitleValue] = useInput()
-  const [name, InputNameValue] = useInput()
   const [contents, InputContentsValue] = useInput()
   const [url, InputUrlValue] = useInput()
 
