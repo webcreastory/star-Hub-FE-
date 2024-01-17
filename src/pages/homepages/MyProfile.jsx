@@ -1,46 +1,4 @@
-/* 서버연결시 살릴부분
-  useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const response = await api.get(`api/users/profile`);
-
-        setProfileData({
-          name: response.data.name,
-          email: response.data.email,
-          major: response.data.major,
-        });
-      } catch (error) {
-        if (error.response) {
-          const statusCode = error.response.status;
-          const errorMessage = error.response.data.message;
-          if (statusCode === 404) {
-            alert(errorMessage);
-          }
-        }
-      }
-    };
-
-    getProfile();
-  }, []);
-*/
-
-import React, { useEffect, useState } from 'react';
-import Navbar from './Navbar';
-import api from '../../api/api';
-import styled from 'styled-components';
-
-function MyProfile() {
-  const [profileData, setProfileData] = useState({
-    name: '',
-    email: '',
-    major: '',
-  });
-
-  const [isEditingMajor, setIsEditingMajor] = useState(false);
-  const [isEditingName, setIsEditingName] = useState(false);
-
-  // 여기서 부터 서버연결 하면 맨위 주석 처리된 코드랑 교체 
-  useEffect(() => {
+/*  useEffect(() => {
     const testProfileData = {
       name: '테스트 유저',
       email: 'test@example.com',
@@ -50,7 +8,56 @@ function MyProfile() {
 
     setProfileData(testProfileData);
   }, []);
-// 여기까지 서버연결 하면 맨위 주석 처리된 코드랑 교체 
+
+*/
+
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import api from '../../api/api';
+
+
+
+
+function MyProfile() {
+  const [profileData, setProfileData] = useState({
+    name: '',
+    email: '',
+    major: '',
+  });
+  
+
+  const [isEditingMajor, setIsEditingMajor] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+
+  const getProfile = async () => {
+      
+    try {
+      const response = await api.get(`/api/user/profile`);
+      
+      setProfileData({
+        name: response.data.name,
+        email: response.data.email,
+        major: response.data.major
+      })
+      
+      
+    } catch (error) {
+      if (error.response) {
+        const statusCode = error.response.status;
+        const errorMessage = error.response.data.message;
+        if (statusCode === 404) {
+          alert(errorMessage);
+        }
+      }
+    }
+  };
+
+  
+   useEffect(() => {
+    getProfile();
+  }, []);
+  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,9 +81,9 @@ function MyProfile() {
 
     try {
       
-      await api.put(`api/users/profile`, {
+      await api.put(`/api/user/profile`, {
         name: profileData.name,
-        major: profileData.major,
+        major: profileData.major
       });
 
       } catch (error) {
@@ -94,11 +101,8 @@ function MyProfile() {
 
 
   return (
-    <StarShareMainForm style={{
-      margin: '10px',
-      marginTop: '100px'
-    }}>
-      <Navbar />
+    <StarShareMainForm >
+      
       <StarShareHeader>
             <StarShareHeaderH1>마이 프로필</StarShareHeaderH1>
           </StarShareHeader>
@@ -294,76 +298,10 @@ const StarShareHeaderH1 = styled.div`
   font-weight: 700;
 `
 
-const StarShareHeaderH2 = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-`
 const StarShareHeaderLine = styled.hr`
   width: 100%;
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 
   margin-top: 30px;
-`
-
-// header button
-
-const StarShareHeaderButton = styled.button`
-  width: 150px;
-  height: 50px;
-  background-color: white;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-
-  font-size: 14px;
-  font-weight: 500;
-
-  cursor: pointer;
-`
-
-// StarShareContents
-
-const StarShareContentsBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  margin-top: 30px;
-
-  width: 70%;
-  height: 100px;
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-`
-
-const StarShareContentsBoxImg = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  
-  margin-right: 10px;
-  width: 100px;
-  height: 100px;
-  background-color: rgba(0, 0, 0, 0.2);
-`
-
-const StarShareContentsBoxtext = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-`
-
-const StarShareContentsBoxtextH1 = styled.div`
-  margin-top: 10px;
-  font-size: 21px;
-  font-weight: 700;
-`
-const StarShareContentsBoxtextH2 = styled.div`
-  font-size: 14px;
-  font-weight: 500;
 `

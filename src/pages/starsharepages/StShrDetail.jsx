@@ -1,15 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import useInput from './hooks/useInput'
+import { useInput } from './hooks/useInput'
 import { useNavigate, useParams } from 'react-router-dom'
 import { putDatas, getDatas, deleteDatas } from '../../api/auth'
-import { StarShareContentsBoxImg2 } from './StarShare'
+import {
+  StarShareMainForm,
+  StarShareHeader,
+  StarShareHeaderH1,
+  StarShareHeaderH2,
+  StarShareHeaderLine,
+  StarShareContentsBox,
+  StarShareContentsBox2,
+  StarShareContentsBoxImg,
+  StarShareContentsBoxImg2,
+  StarShareContentsBoxtext,
+  StarShareModalInputBox,
+  StarShareModalInputBoxText,
+  StarShareModalInput,
+  StarShareModalInput2,
+  StarShareContentsBox3,
+  StarShareContentsBoxtext2,
+  StarShareModalButton,
+  StarShareModalButton2,
+} from './styles/DetailStyle'
 
 function StShrDetail() {
 
   // 서버 데이터 불러오기
-  const { isLoading, isError, data } = useQuery("getDatas", getDatas);
+  const { data } = useQuery("getDatas", getDatas);
 
   //nav
   const navigate = useNavigate();
@@ -24,9 +43,9 @@ function StShrDetail() {
   const params = useParams();
 
   const foundData = data && data.find((item) => {
-    console.log(item.id)
-    console.log(data)
-    console.log(params.id)
+    // console.log(item.id)
+    // console.log(data)
+    // console.log(params.id)
     return item.id === params.id
   })
   // console.log(`123123${foundData.id}`)
@@ -101,14 +120,15 @@ function StShrDetail() {
     navigate("/StarShare")
   }
 
-  
+
   return (
     <>
       <StarShareMainForm>
         <StarShareHeader>
-          <StarShareHeaderH1 onClick = {()=> {
-              navigate("/StarShare")
-            }}>
+          <StarShareHeaderH1 onClick={() => {
+            navigate("/StarShare")
+
+          }}>
             스타쉐어
           </StarShareHeaderH1>
           <StarShareHeaderH2>
@@ -119,9 +139,8 @@ function StShrDetail() {
 
         <StarShareContentsBox>
           <StarShareContentsBox2>
-
             <StarShareContentsBoxImg >
-              <StarShareContentsBoxImg2/>
+              <StarShareContentsBoxImg2 />
             </StarShareContentsBoxImg>
 
             <StarShareContentsBoxtext>
@@ -177,8 +196,8 @@ function StShrDetail() {
 
           <StarShareContentsBox3>
             <StarShareContentsBoxtext>
-            <StarShareContentsBoxtext2>
-              {foundData ? `${foundData.name}(${foundData.major})` : ''}
+              <StarShareContentsBoxtext2>
+                {foundData ? `${foundData.name}(${foundData.major})` : ''}
               </StarShareContentsBoxtext2>
             </StarShareContentsBoxtext>
 
@@ -197,192 +216,3 @@ function StShrDetail() {
 }
 
 export default StShrDetail
-
-const StarShareMainForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 20px;
-`
-// StarShareHeader
-const StarShareHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-
-  width: 100%;
-
-`
-const StarShareHeaderH1 = styled.div`
-  font-size: 30px;
-  font-weight: 700;
-  cursor: pointer;
-`
-
-const StarShareHeaderH2 = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-`
-const StarShareHeaderLine = styled.hr`
-  width: 100%;
-  border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-  margin-top: 30px;
-`
-
-// header button
-
-
-// StarShareContents
-
-const StarShareContentsBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  margin-top: 30px;
-
-  width: 70%;
-  min-width: 800px;
-  height: 500px;
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-`
-const StarShareContentsBox2 = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-
-  border: 1px solid rgba(0, 0, 0, 0.1);
-`
-
-const StarShareContentsBoxImg = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  
-  min-width:400px;
-  height: 400px;
-`
-
-
-// text
-
-const StarShareContentsBoxtext = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width:100%;
-  min-width:350px;
-  margin: 0px 15px ;
-
-`
-
-// inner box
-
-const StarShareModalInputBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  margin-bottom: 10px;
-
-`
-
-const StarShareModalInputBoxText = styled.div`
-  margin-right: auto;
-  margin-bottom: 5px;
-`
-
-const StarShareModalInput = styled.input`
-  width: 100%;
-  height: 30px;
-  border: 1px solid gray;
-  border-radius: 10px;
-`
-
-const StarShareModalInput2 = styled.textarea`
-  margin-top: 5px;
-  width: 100%;
-  height: 200px;
-  max-width: 100%;
-  min-width: 100%;
-  min-height: 200px;
-  
-  max-height: 200px;
-  border: 1px solid gray;
-  border-radius: 10px;
-`
-// 버튼 박스
-
-const StarShareContentsBox3 = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-`
-
-const StarShareContentsBoxtext2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-
-  width: 150px;
-  height: 50px;
-  margin-top: 30px;
-
-  background-color: white;
-  border-radius: 10px;
-
-  font-size: 21px;
-  font-weight: 600;
-  margin-right: 30px;
-`
-
-
-const StarShareModalButton = styled.button`
-  width: 150px;
-  height: 50px;
-  margin-top: 30px;
-
-  background-color: white;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-
-  font-size: 14px;
-  font-weight: 500;
-  margin-right: 10px;
-  margin-left: auto;
-
-  cursor: pointer;
-`
-const StarShareModalButton2 = styled.button`
-  width: 150px;
-  height: 50px;
-  margin-top: 30px;
-
-  background-color: white;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-
-  font-size: 14px;
-  font-weight: 500;
-  margin-right: 10px;
-
-  cursor: pointer;
-`

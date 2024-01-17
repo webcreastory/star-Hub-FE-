@@ -110,166 +110,187 @@ function StHubDetail(props) {
         }
         if (editingCommentIndex !== null) {
             // 기존 댓글 수정
-            setCommentsList((prevComments) => {
-                const updatedComments = [...prevComments];
-                updatedComments[editingCommentIndex] = comments;
-                return updatedComments;
-            });
-            setEditingCommentIndex(null); // 수정 상태 초기화
-        } else {
-            // 새로운 댓글 추가
-            setCommentsList((prevComments) => [...prevComments, comments]);
         }
-        setComments('');
-    };
-    // 댓글 수정하기 버튼 함수
-    const handleEditComment = (index) => {
-        setComments(commentsList[index]); // 입력 필드에 댓글 설정
-        setEditingCommentIndex(index);
-    };
-    // 댓글 삭제하기 버튼 함수
-    const handleDeleteComment = (index) => {
-        const confirmDelete = window.confirm('댓글을 정말 삭제하시겠습니까?');
-        if (confirmDelete) {
-            setCommentsList((prevComments) => {
-                const updatedComments = [...prevComments];
-                updatedComments.splice(index, 1); // 해당 인덱스의 댓글 제거
-                return updatedComments;
-            });
-            setEditingCommentIndex(null); // 수정 상태 초기화
-        }
-    };
 
-    useEffect(() => {
-        starHubValue();
-    }, []);
+        // const handleSaveClick = async () => {
+        //     setIsEditing(false);
 
-    return (
-        <>
-            <StarHubMainForm>
-                <StarHubHeader>
-                    <StarHubHeaderH1>스타허브 상세페이지</StarHubHeaderH1>
-                    <StarHubHeaderH2>스타허브 내용을 자세히 확인해보세요.</StarHubHeaderH2>
-                    <StarHubHeaderLine />
-                </StarHubHeader>
+        //     // 입력 필드에서 최신 변경 사항을 반영하여 editedItem 상태를 업데이트합니다.
+        //     setEditedItem((prevEditedItem) => ({
+        //         ...prevEditedItem,
+        //         imageUrl: editedItem.imageUrl,
+        //         date: editedItem.date,
+        //         contents: editedItem.contents,
+        //         title:editedItem.title,
+        //     }));
 
-                {selectedItem && (
-                    <StBox w="800px" h="600px">
-                        <h1>제목</h1>
-                        {isEditing ? (
-                            <StInput
-                                type="text"
-                                value={editedItem.title}
-                                onChange={(e) => setEditedItem({ ...editedItem, title: e.target.value })}
-                            />
-                        ) : (
-                            <ShdHeaderH1>{selectedItem.title}</ShdHeaderH1>
-                        )}
-                        <StContainer>
-                            <StBox w="450px" h="250px">
+        //     try {
+        //         const response = await api.put(`/starboards/${selectedItem.id}`, editedItem);
+        //         console.log('저장됨:', response.data);
+
+        //         // 수정된 내용을 commentsList에 반영합니다.
+        //         setCommentsList((prevComments) => {
+        //             const updatedComments = [...prevComments];
+        //             updatedComments[editingCommentIndex] = comments;
+        //             return updatedComments;
+        //         });
+        //         setEditingCommentIndex(null); // 수정 상태 초기화
+        //     } else {
+        //         // 새로운 댓글 추가
+        //         setCommentsList((prevComments) => [...prevComments, comments]);
+        //     }
+        //     setComments('');
+        // };
+        // 댓글 수정하기 버튼 함수
+        const handleEditComment = (index) => {
+            setComments(commentsList[index]); // 입력 필드에 댓글 설정
+            setEditingCommentIndex(index);
+        };
+        // 댓글 삭제하기 버튼 함수
+        const handleDeleteComment = (index) => {
+            const confirmDelete = window.confirm('댓글을 정말 삭제하시겠습니까?');
+            if (confirmDelete) {
+                setCommentsList((prevComments) => {
+                    const updatedComments = [...prevComments];
+                    updatedComments.splice(index, 1); // 해당 인덱스의 댓글 제거
+                    return updatedComments;
+                });
+                setEditingCommentIndex(null); // 수정 상태 초기화
+            }
+        };
+
+        useEffect(() => {
+            starHubValue();
+        }, []);
+
+        return (
+            <>
+                <StarHubMainForm>
+                    <StarHubHeader>
+                        <StarHubHeaderH1>스타허브 상세페이지</StarHubHeaderH1>
+                        <StarHubHeaderH2>스타허브 내용을 자세히 확인해보세요.</StarHubHeaderH2>
+                        <StarHubHeaderLine />
+                    </StarHubHeader>
+
+                    {selectedItem && (
+                        <StBox w="800px" h="600px">
+                            <h1>제목</h1>
+                            {isEditing ? (
+                                <StInput
+                                    type="text"
+                                    value={editedItem.title}
+                                    onChange={(e) => setEditedItem({ ...editedItem, title: e.target.value })}
+                                />
+                            ) : (
+                                <ShdHeaderH1>{selectedItem.title}</ShdHeaderH1>
+                            )}
+                            <StContainer>
+                                <StBox w="450px" h="250px">
+                                    {isEditing ? (
+                                        <StInput
+                                            type="text"
+                                            id="imageInput" // 추가: id를 할당합니다.
+                                            value={editedItem.imageUrl}
+                                            onChange={(e) => setEditedItem({ ...editedItem, imageUrl: e.target.value })}
+                                        />
+                                    ) : (
+                                        <ImageBox src={selectedItem.imageUrl} alt="썸네일 이미지" />
+                                    )}
+                                </StBox>
+
+                                <div>
+                                    <h1>작성자</h1>
+                                    {isEditing ? (
+                                        <StInput
+                                            type="text"
+                                            value={editedItem.name}
+                                            onChange={(e) => setEditedItem({ ...editedItem, name: e.target.value })}
+                                        />
+                                    ) : (
+                                        <h2>{selectedItem.name}</h2>
+                                    )}
+                                    <h1>날짜</h1>
+                                    {isEditing ? (
+                                        <StInput
+                                            type="date"
+                                            value={editedItem.date}
+                                            onChange={(e) => setEditedItem({ ...editedItem, date: e.target.value })}
+                                        />
+                                    ) : (
+                                        <h2>{selectedItem.date}</h2>
+                                    )}
+                                    <h1>내용</h1>
+                                    {isEditing ? (
+                                        <StTextarea
+                                            type="text"
+                                            value={editedItem.contents}
+                                            onChange={(e) => setEditedItem({ ...editedItem, contents: e.target.value })}
+                                        />
+                                    ) : (
+                                        <h2>{selectedItem.contents}</h2>
+                                    )}
+                                </div>
+                            </StContainer>
+
+                            <StContainer>
+                                <StBtn w="200px" onClick={() => Navigate('/starhub')}>
+                                    스타허브
+                                </StBtn>
                                 {isEditing ? (
-                                    <StInput
-                                        type="text"
-                                        id="imageInput" // 추가: id를 할당합니다.
-                                        value={editedItem.imageUrl}
-                                        onChange={(e) => setEditedItem({ ...editedItem, imageUrl: e.target.value })}
-                                    />
+                                    <StBtn w="200px" onClick={handleSaveClick}>
+                                        저장하기
+                                    </StBtn>
                                 ) : (
-                                    <ImageBox src={selectedItem.imageUrl} alt="썸네일 이미지" />
+                                    <StBtn w="200px" onClick={handleEditClick}>
+                                        수정하기
+                                    </StBtn>
                                 )}
-                            </StBox>
+                                <StBtn w="200px" onClick={handleDeleteClick}>
+                                    {/* <StBtn w="200px" onClick={()=>handleDeleteClick(item.id)}> */}
+                                    삭제하기
+                                </StBtn>
+                            </StContainer>
 
                             <div>
-                                <h1>작성자</h1>
-                                {isEditing ? (
-                                    <StInput
-                                        type="text"
-                                        value={editedItem.name}
-                                        onChange={(e) => setEditedItem({ ...editedItem, name: e.target.value })}
-                                    />
-                                ) : (
-                                    <h2>{selectedItem.name}</h2>
-                                )}
-                                <h1>날짜</h1>
-                                {isEditing ? (
-                                    <StInput
-                                        type="date"
-                                        value={editedItem.date}
-                                        onChange={(e) => setEditedItem({ ...editedItem, date: e.target.value })}
-                                    />
-                                ) : (
-                                    <h2>{selectedItem.date}</h2>
-                                )}
-                                <h1>내용</h1>
-                                {isEditing ? (
+                                <h1>댓글</h1>
+                                <StContainer>
                                     <StTextarea
                                         type="text"
-                                        value={editedItem.contents}
-                                        onChange={(e) => setEditedItem({ ...editedItem, contents: e.target.value })}
-                                    />
-                                ) : (
-                                    <h2>{selectedItem.contents}</h2>
-                                )}
-                            </div>
-                        </StContainer>
-
-                        <StContainer>
-                            <StBtn w="200px" onClick={() => Navigate('/starhub')}>
-                                스타허브
-                            </StBtn>
-                            {isEditing ? (
-                                <StBtn w="200px" onClick={handleSaveClick}>
-                                    저장하기
-                                </StBtn>
-                            ) : (
-                                <StBtn w="200px" onClick={handleEditClick}>
-                                    수정하기
-                                </StBtn>
-                            )}
-                            <StBtn w="200px" onClick={handleDeleteClick}>
-                                {/* <StBtn w="200px" onClick={()=>handleDeleteClick(item.id)}> */}
-                                삭제하기
-                            </StBtn>
-                        </StContainer>
-
-                        <div>
-                            <h1>댓글</h1>
-                            <StContainer>
-                                <StTextarea
-                                    type="text"
-                                    value={comments}
-                                    onChange={(e) => {
-                                        setComments(e.target.value);
-                                    }}
-                                    placeholder="댓글 내용을 입력해주세요(500자 이내)"
-                                ></StTextarea>
-                                <StContainer>
-                                    <StBtn w="200px" onClick={CommentsButton}>
-                                        댓글저장
-                                    </StBtn>
+                                        value={comments}
+                                        onChange={(e) => {
+                                            setComments(e.target.value);
+                                        }}
+                                        placeholder="댓글 내용을 입력해주세요(500자 이내)"
+                                    ></StTextarea>
+                                    <StContainer>
+                                        <StBtn w="200px" onClick={CommentsButton}>
+                                            댓글저장
+                                        </StBtn>
+                                    </StContainer>
                                 </StContainer>
-                            </StContainer>
-                            {/* Display comments */}
-                            <CommentDiv fd="column">
-                                {commentsList.map((comments, index) => (
-                                    <CommentDiv key={index}>
-                                        {comments}
-                                        <StBtn w="50px" ml="20px" onClick={() => handleEditComment(index)}>
-                                            🖍
-                                        </StBtn>
-                                        <StBtn w="50px" onClick={() => handleDeleteComment(index)}>
-                                            ✂
-                                        </StBtn>
-                                    </CommentDiv>
-                                ))}
-                            </CommentDiv>
-                        </div>
-                    </StBox>
-                )}
-            </StarHubMainForm>
-        </>
-    );
+                                {/* Display comments */}
+                                <CommentDiv fd="column">
+                                    {commentsList.map((comments, index) => (
+                                        <CommentDiv key={index}>
+                                            {comments}
+                                            <StBtn w="50px" ml="20px" onClick={() => handleEditComment(index)}>
+                                                🖍
+                                            </StBtn>
+                                            <StBtn w="50px" onClick={() => handleDeleteComment(index)}>
+                                                ✂
+                                            </StBtn>
+                                        </CommentDiv>
+                                    ))}
+                                </CommentDiv>
+                            </div>
+                        </StBox>
+                    )}
+                </StarHubMainForm>
+            </>
+        );
+    };
 }
+export default StHubDetail;
 
 // MainForm
 const StarHubMainForm = styled.div`
@@ -380,7 +401,3 @@ const StTextarea = styled.textarea`
     margin-right: 5px;
     margin-top: 10px;
 `;
-
-export default StHubDetail;
-
-// starhub 상세페이지
