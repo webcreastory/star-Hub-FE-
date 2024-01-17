@@ -15,13 +15,15 @@ const putDatas = async (newStarShare) => {
     return response.data
 }
 const deleteDatas = async (id) => {
-    const response = await api.delete(`/api/starshares/${id}`)
+    const response = await api.delete(`/api/starshare/${id}`)
     // console.log(response.data)
     return response.data
 }
-const getLikeDatas = async (shareId) => {
-    const response = await api.get(`/api/starshares/${shareId}/like`)
-    // console.log(response.data)
-    return response.data
-}
-export { getDatas , postDatas, putDatas, deleteDatas, getLikeDatas}
+
+// const getLikeDatas = async (shareId) => {
+//     const response = await api.get(`/api/starshare/${shareId}/like`)
+//     // console.log(response.data)
+//     return response.data
+// }
+
+export { getDatas , postDatas, putDatas, deleteDatas}

@@ -45,7 +45,7 @@ function StShrDetail() {
   const foundData = data && data.find((item) => {
     // console.log(item.id)
     // console.log(data)
-    // console.log(params.id)
+    console.log(params.id)
     return item.id === params.id
   })
   // console.log(`123123${foundData.id}`)
@@ -82,11 +82,9 @@ function StShrDetail() {
 
       const newStarShare = [
         {
-          name: "최우식",
+          title,
           contents,
           url,
-          major: "R반",
-          title,
         },
         {
           id: foundData.id
