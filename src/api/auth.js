@@ -1,4 +1,5 @@
 import api from './api'
+import axios from 'axios'
 
 const getDatas = async () => {
     const response = await api.get('starshare')
@@ -6,10 +7,15 @@ const getDatas = async () => {
     return response.data
 }
 
-const postDatas = async (newStarShare) => {
-    const response = await api.post('starshare', newStarShare)
+// const postDatas = async (newStarShare) => {
+//     const response = await api.post('starshare', newStarShare)
     
-    return response.data
+//     return response.data
+// }
+const postDatas = async (newStarShare) => {
+    const response = await axios.post('http://3.37.123.243:8080/api/starshare', newStarShare)
+    console.log(response)
+    return response
 }
 
 const putDatas = async (newStarShare) => {

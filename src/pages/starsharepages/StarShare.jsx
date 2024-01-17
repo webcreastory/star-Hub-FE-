@@ -4,18 +4,30 @@ import styled from 'styled-components'
 import { ModalPotal } from './Potal'
 import StShrModal from './StShrModal'
 import { getDatas, getLikeDatas } from '../../api/auth'
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import api from '../../api/api'
 import axios from "axios";
-import LinkPreview from "./test";
+import { useHover } from "./hooks/useInput";
+import {
+  StarShareMainForm,
+  StarShareHeader,
+  StarShareHeaderH1,
+  StarShareHeaderH2,
+  StarShareHeaderLine,
+  StarShareHeaderButton,
+  StarShareContentsBox,
+  StarShareContentsBoxImg,
+  StarShareContentsBoxImg2,
+  StarShareContentsBoxtext,
+  StarShareContentsBoxtextH1,
+  StarShareContentsBoxtextH2,
+  GoodAdd,
 
+} from "./styles/ShareStyle";
 
-// modal state (potal component 인자 modal, index.html target)
 
 function StarShare() {
-
-
 
   ///////////////////
   // const LikeQueryState = () => {
@@ -27,7 +39,15 @@ function StarShare() {
   // }
   // console.log(LikeQueryState().likeData)
 
-  const [imgUrl, setImgUlr] = useState('img/르탄가방.png')
+
+
+  // const a = async() => {
+  //   const respone = await axios.get('http://3.37.123.243:8080/api/starshare')
+  //   return console.log(respone)
+  // }
+  // useEffect(()=>{
+  //   a()
+  // },[])
 
   const { isLoading, isError, data } = useQuery("getDatas", getDatas);
   // console.log(data)
@@ -80,20 +100,27 @@ function StarShare() {
           data.map((item) => {
             return (
               <StarShareContentsBox key={item.id}
-                onClick={() => {
-                  hendlerDetailPage(item.id)
-                }}
+                onClick={() => { }}
               >
-                <StarShareContentsBoxImg>
-                  <StarShareContentsBoxImg2 imgUrl={imgUrl}/>
+                <StarShareContentsBoxImg onClick={() => { hendlerDetailPage(item.id) }}>
+                  <StarShareContentsBoxImg2 />
                 </StarShareContentsBoxImg>
 
                 <StarShareContentsBoxtext>
-                  <StarShareContentsBoxtextH2>{`${item.name}(${item.major})`}</StarShareContentsBoxtextH2>
-                  <StarShareContentsBoxtextH1>{item.title}</StarShareContentsBoxtextH1>
+                  <StarShareContentsBoxtextH2
+                    onClick={() => { }}
+                  >
+                    {`${item.name}(${item.major})`}
+                  </StarShareContentsBoxtextH2>
+                  <StarShareContentsBoxtextH1
+                    onClick={() => { }}
+                  >{item.title}
+                  </StarShareContentsBoxtextH1>
                 </StarShareContentsBoxtext>
-                <GoodAdd>
-                  👍
+                <GoodAdd
+                  onClick={() => { }}
+                >
+                  <div>👍</div>
                 </GoodAdd>
               </StarShareContentsBox>
             )
@@ -108,126 +135,3 @@ function StarShare() {
 export default StarShare
 
 
-const StarShareMainForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 20px;
-`
-// StarShareHeader
-const StarShareHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-
-  width: 100%;
-
-`
-const StarShareHeaderH1 = styled.div`
-  font-size: 30px;
-  font-weight: 700;
-`
-
-const StarShareHeaderH2 = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-`
-const StarShareHeaderLine = styled.hr`
-  width: 100%;
-  border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-  margin-top: 30px;
-`
-
-// header button
-
-const StarShareHeaderButton = styled.button`
-  width: 150px;
-  height: 50px;
-  background-color: white;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-
-  font-size: 14px;
-  font-weight: 500;
-
-  cursor: pointer;
-`
-
-// StarShareContents
-
-const StarShareContentsBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-  margin-top: 30px;
-
-  width: 70%;
-  height: 100px;
-  padding: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-
-  cursor: pointer;
-`
-
-const StarShareContentsBoxImg = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  
-  margin-right: 10px;
-  width: 100px;
-  height: 100px;
-
-`
-export const StarShareContentsBoxImg2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  
-  width: 100%;
-  height: 100%;
-  background: 
-  linear-gradient( 140deg,
-    rgba(0, 0, 0, 0.1),
-    rgba(255, 255, 255, 0)),
-    url(${props => props.imgUrl});
-
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-`
-
-const StarShareContentsBoxtext = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-`
-
-const StarShareContentsBoxtextH1 = styled.div`
-  margin-top: 10px;
-  font-size: 21px;
-  font-weight: 700;
-`
-const StarShareContentsBoxtextH2 = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-`
-
-// 좋아요
-const GoodAdd = styled.div`
-  margin-left: auto;
-  margin-bottom: auto;
-`
