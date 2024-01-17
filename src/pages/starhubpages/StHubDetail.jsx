@@ -27,8 +27,8 @@ function StHubDetail(props) {
     const selectedItem = location.state?.selectedItem || null;
 
     const starHubValue = async () => {
-        // const { data } = await api.get(`api/starboards/${boardId}`);
-        const { data } = await api.get(`/starboards`);
+        const { data } = await api.get(`api/starboards/${boardId}`);
+        // const { data } = await api.get(`/starboards`);
         setDatas(data);
     };
     // 저장하기 버튼 함수

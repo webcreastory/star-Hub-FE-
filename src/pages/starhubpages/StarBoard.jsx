@@ -25,7 +25,7 @@ function StarBoard() {
                 alert('내용을 입력해주세요');
                 return;
             }
-            const response = await api.post(`/starboards`, { date, name, title, contents, imageUrl });
+            const response = await api.post(`/api/starboards`, { date, title, contents, imageUrl });
             // 스타보드 추가 후 새로운 스타보드만을 받아오기
             // const { data: newStarboard } = await api.get(`/starboards/${response.data.id}`);
             Navigate('/starhub');

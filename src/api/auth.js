@@ -1,36 +1,27 @@
 import api from './api'
-import axios from 'axios'
-
 const getDatas = async () => {
-    const response = await api.get('starshare')
+    const response = await api.get('/api/starshare')
     // console.log(response.data)
     return response.data
 }
-
-// const postDatas = async (newStarShare) => {
-//     const response = await api.post('starshare', newStarShare)
-    
-//     return response.data
-// }
 const postDatas = async (newStarShare) => {
-    const response = await axios.post('http://3.37.123.243:8080/api/starshare', newStarShare)
-    console.log(response)
-    return response
+    const response = await api.post('/api/starshare', newStarShare)
+    // console.log(response.data)
+    return response.data
 }
-
 const putDatas = async (newStarShare) => {
     const response = await api.put(`starshare/${newStarShare[1].id}`, newStarShare[0])
+    // console.log(response.data)
     return response.data
 }
-
 const deleteDatas = async (id) => {
-    const response = await api.delete(`starshare/${id}`)
+    const response = await api.delete(`/api/starshares/${id}`)
+    // console.log(response.data)
     return response.data
 }
-
-const getLikeDatas = async () => {
-    const response = await api.get('api')
+const getLikeDatas = async (shareId) => {
+    const response = await api.get(`/api/starshares/${shareId}/like`)
+    // console.log(response.data)
     return response.data
 }
-
 export { getDatas , postDatas, putDatas, deleteDatas, getLikeDatas}
