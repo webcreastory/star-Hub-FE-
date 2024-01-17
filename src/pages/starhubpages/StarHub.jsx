@@ -24,7 +24,7 @@ function StarHub() {
     };
     const starHubValue = async () => {
         try {
-            const { data } = await api.get(`/starboards`);
+            const { data } = await api.get(`/api/starhubs`);
             // const { data } = await axios.get("http://localhost:4000/starboards");
             // console.log('ddddd', data);
             setDatas(data);
@@ -40,7 +40,8 @@ function StarHub() {
             // inputValue가 없으면 컴포넌트가 처음 마운트된 것이므로 데이터 로드
             starHubValue();
         }
-    }, [inputValue]);
+    }, []);
+    // }, [inputValue]);
     return (
         <>
             <StarHubMainForm>

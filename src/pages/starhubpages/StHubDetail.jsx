@@ -28,7 +28,7 @@ function StHubDetail(props) {
 
     const starHubValue = async () => {
         // const { data } = await api.get(`api/starboards/${boardId}`);
-        const { data } = await api.get(`/starboards`);
+        const { data } = await api.get(`/api/starboards`);
         setDatas(data);
     };
     // 저장하기 버튼 함수
@@ -44,7 +44,7 @@ function StHubDetail(props) {
             contents: editedItem.contents,
         }));
         try {
-            const response = await api.put(`/starboards/${selectedItem.id}`, editedItem);
+            const response = await api.put(`/api/starboards/${selectedItem.id}`, editedItem);
             console.log('저장됨:', response.data);
             // 수정된 내용을 commentsList에 반영합니다.
             setCommentsList((prevComments) => {
@@ -61,6 +61,10 @@ function StHubDetail(props) {
             console.error('데이터 저장 중 오류 발생:', error);
         }
     };
+    useEffect(() => {
+        starHubValue();
+    }, []);
+
     // 수정하기 버튼 함수
     const handleEditClick = () => {
         setIsEditing(true);
@@ -92,7 +96,7 @@ function StHubDetail(props) {
         const confirmDelete = window.confirm('정말 삭제하시겠습니까?');
         if (confirmDelete) {
             try {
-                await api.delete(`/starboards/${selectedItem.id}`);
+                await api.delete(`/api/starboards/${selectedItem.id}`);
                 console.log('삭제됨');
                 // `updateStarBoardData` 호출 후에 페이지 이동
                 updateStarBoardData(null);
@@ -112,35 +116,6 @@ function StHubDetail(props) {
             // 기존 댓글 수정
         }
 
-        // const handleSaveClick = async () => {
-        //     setIsEditing(false);
-
-        //     // 입력 필드에서 최신 변경 사항을 반영하여 editedItem 상태를 업데이트합니다.
-        //     setEditedItem((prevEditedItem) => ({
-        //         ...prevEditedItem,
-        //         imageUrl: editedItem.imageUrl,
-        //         date: editedItem.date,
-        //         contents: editedItem.contents,
-        //         title:editedItem.title,
-        //     }));
-
-        //     try {
-        //         const response = await api.put(`/starboards/${selectedItem.id}`, editedItem);
-        //         console.log('저장됨:', response.data);
-
-        //         // 수정된 내용을 commentsList에 반영합니다.
-        //         setCommentsList((prevComments) => {
-        //             const updatedComments = [...prevComments];
-        //             updatedComments[editingCommentIndex] = comments;
-        //             return updatedComments;
-        //         });
-        //         setEditingCommentIndex(null); // 수정 상태 초기화
-        //     } else {
-        //         // 새로운 댓글 추가
-        //         setCommentsList((prevComments) => [...prevComments, comments]);
-        //     }
-        //     setComments('');
-        // };
         // 댓글 수정하기 버튼 함수
         const handleEditComment = (index) => {
             setComments(commentsList[index]); // 입력 필드에 댓글 설정
@@ -158,10 +133,6 @@ function StHubDetail(props) {
                 setEditingCommentIndex(null); // 수정 상태 초기화
             }
         };
-
-        useEffect(() => {
-            starHubValue();
-        }, []);
 
         return (
             <>

@@ -25,7 +25,8 @@ function StarBoard() {
                 alert('내용을 입력해주세요');
                 return;
             }
-            const response = await api.post(`/starboards`, { date, name, title, contents, imageUrl });
+            const response = await api.post(`/api/starboards`, { date, title, contents, imageUrl });
+            // const response = await api.post(`/starboards`, { date, title, contents, imageUrl });
             // 스타보드 추가 후 새로운 스타보드만을 받아오기
             // const { data: newStarboard } = await api.get(`/starboards/${response.data.id}`);
             Navigate('/starhub');
@@ -50,10 +51,9 @@ function StarBoard() {
         };
     };
 
-    // useEffect(() => {
-    //     a();
-    // }, []);
-    
+    useEffect(() => {
+        AddButton();
+    }, []);
 
     return (
         <>
@@ -67,7 +67,7 @@ function StarBoard() {
                     onSubmit={(e) => {
                         e.preventDefault();
                     }}
-                > // 버튼을 눌러도 새로고침이 안되게 하는 기능: submit이 새로고침하는 특성이 있어서 preventDefault로 막아줌
+                >
                     <StDiv2>
                         <h4>날짜</h4>
                         <StInput
