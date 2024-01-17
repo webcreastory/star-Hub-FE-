@@ -7,6 +7,8 @@ function StarHub() {
     const Navigate = useNavigate();
     const location = useLocation();
     const [datas, setDatas] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null); // 추가
+
     // StarBoard에서 전달된 값들을 받기
     const inputValue = location.state?.inputValue || {};
     // StarHub 컴포넌트에서
@@ -23,6 +25,8 @@ function StarHub() {
     const starHubValue = async () => {
         try {
             const { data } = await api.get(`/starboards`);
+            // const { data } = await axios.get("http://localhost:4000/starboards");
+            // console.log('ddddd', data);
             setDatas(data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -77,7 +81,7 @@ function StarHub() {
                         );
                     })}
                 </StarHubContainer>
-                <StHubDetail updateStarBoardData={handleUpdateStarBoardData} />
+                {selectedItem && <StHubDetail updateStarBoardData={handleUpdateStarBoardData} />}
             </StarHubMainForm>
         </>
     );
@@ -89,6 +93,7 @@ const StarHubMainForm = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    margin-left: 20px;
 `;
 // StarHubHeader
 const StarHubHeader = styled.div`
@@ -137,7 +142,7 @@ const StBox = styled.div`
     color: white;
     font-size: 10px;
     width: 230px;
-    height: 325px;
+    height: 340px;
     padding: 20px;
     border: none;
     border-radius: 10px;

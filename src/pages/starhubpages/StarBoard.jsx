@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/api';
 import styled from 'styled-components';
+import axios from 'axios';
 
 function StarBoard() {
+    // const a = async () => {
+    //     const response = await axios.get('http://3.37.123.243:8080/api/starhubs/1');
+    //     return console.log(response);
+    // };
     const Navigate = useNavigate();
-
-    const [boardid, setBoardId] = useState();
+    // const [boardid, setBoardId] = useState();
     const [date, setDate] = useState();
     const [name, setName] = useState();
     const [major, setMajor] = useState();
@@ -14,26 +18,16 @@ function StarBoard() {
     const [contents, setContents] = useState();
     const [imageUrl, setImageUrl] = useState('');
 
-    const onchangeImageUpload = (e) => {
-        const { files } = e.target;
-        const uploadFile = files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(uploadFile);
-        reader.onloadend = () => {
-            setImageUrl(reader.result);
-        };
-    };
-
+    // 스타보드 저장하기 버튼 함수
     const AddButton = async () => {
         try {
             if (date === '' || name === '' || title === '' || contents === '' || imageUrl === '') {
                 alert('내용을 입력해주세요');
                 return;
             }
-            const response = await api.post(`/starboards`, { boardid, date, name, major, title, contents, imageUrl });
+            const response = await api.post(`/starboards`, { date, name, title, contents, imageUrl });
             // 스타보드 추가 후 새로운 스타보드만을 받아오기
             // const { data: newStarboard } = await api.get(`/starboards/${response.data.id}`);
-
             Navigate('/starhub');
         } catch (error) {
             if (error.response) {
@@ -45,6 +39,21 @@ function StarBoard() {
             }
         }
     };
+    // 이미지 업로드 버튼 함수
+    const onchangeImageUpload = (e) => {
+        const { files } = e.target;
+        const uploadFile = files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(uploadFile);
+        reader.onloadend = () => {
+            setImageUrl(reader.result);
+        };
+    };
+
+    // useEffect(() => {
+    //     a();
+    // }, []);
+    
 
     return (
         <>
@@ -58,7 +67,7 @@ function StarBoard() {
                     onSubmit={(e) => {
                         e.preventDefault();
                     }}
-                >
+                > // 버튼을 눌러도 새로고침이 안되게 하는 기능: submit이 새로고침하는 특성이 있어서 preventDefault로 막아줌
                     <StDiv2>
                         <h4>날짜</h4>
                         <StInput
@@ -113,6 +122,7 @@ function StarBoard() {
                         <br />
                         <StBtn onClick={() => Navigate('/starhub')}>스타허브</StBtn>
                         <StBtn onClick={AddButton}>저장</StBtn>
+                        {/* <StBtn type="submit" onClick={AddButton}>저장</StBtn> */}
                     </CenterDiv>
                 </form>
             </StarBoardMainForm>
