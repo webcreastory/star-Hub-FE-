@@ -36,6 +36,7 @@ function Login() {
 
       Cookies.set('token', response.data.token);
       Cookies.set('userId', response.data.userId);
+      // 쿠키 저장하는 코드!
 
       navigate('/starhub');
     } catch (error) {

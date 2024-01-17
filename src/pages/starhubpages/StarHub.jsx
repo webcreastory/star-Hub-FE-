@@ -41,7 +41,6 @@ function StarHub() {
             starHubValue();
         }
     }, []);
-    // }, [inputValue]);
     return (
         <>
             <StarHubMainForm>
