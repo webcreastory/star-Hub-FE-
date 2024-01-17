@@ -27,7 +27,7 @@ function StHubDetail(props) {
     const selectedItem = location.state?.selectedItem || null;
 
     const starHubValue = async () => {
-        const { data } = await api.get(`/starboards`);
+        const { data } = await api.get(`api/starboards/`);
         console.log('++++', data);
         setDatas(data);
     };
@@ -72,15 +72,14 @@ function StHubDetail(props) {
 
     const handleSaveClick = async () => {
         setIsEditing(false);
-
+        
         // 입력 필드에서 최신 변경 사항을 반영하여 editedItem 상태를 업데이트합니다.
         setEditedItem((prevEditedItem) => ({
             ...prevEditedItem,
             imageUrl: editedItem.imageUrl,
-            name: editedItem.name,
-            major: editedItem.major,
             date: editedItem.date,
             contents: editedItem.contents,
+            title:editedItem.title,
         }));
 
         try {

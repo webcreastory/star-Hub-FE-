@@ -15,6 +15,7 @@ import StHubDetail from './pages/starhubpages/StHubDetail';
 import StarShare from './pages/starsharepages/StarShare';
 import StShrDetail from './pages/starsharepages/StShrDetail';
 import StShrModal from './pages/starsharepages/StShrModal';
+import Layout from './pages/homepages/Layout';
 
 const queryClient = new QueryClient();
 
@@ -26,29 +27,29 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          {/* homepages 구성 */}
-          <Route path='/' element={<Login />} />
-          <Route path='signup' element={<SignUp />} />
-          <Route path='mypage' element={<Mypage />} />
-          <Route path='myprofile' element={<MyProfile />} />
-          <Route path='password' element={<Password />} />
-        {/* starhubpages 구성 */}
-        <Route path='starhub' element={<StarHub updateStarBoardData={handleStarBoardDataUpdate} />} />
-        <Route path='starboards' element={<StarBoard />} />
-        <Route
-          path='sthubdetail'
-          element={<StHubDetail updateStarBoardData={handleStarBoardDataUpdate} />}
-        />
-        {/* // starsharepages 구성 */}
-          <Route path='starshare' element={<StarShare />} />
-          <Route path='/starshare/:id' element={<StShrDetail />} />
-          <Route path='stshrmodal' element={<StShrModal />} />
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          
+          <Route index element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="mypage" element={<Mypage />} />
+          <Route path="myprofile" element={<MyProfile />} />
+          <Route path="password" element={<Password />} />
+
+          <Route path="starhub" element={<StarHub updateStarBoardData={handleStarBoardDataUpdate} />} />
+          <Route path="starboards" element={<StarBoard />} />
+          <Route path="sthubdetail" element={<StHubDetail updateStarBoardData={handleStarBoardDataUpdate} />} />
+
+          <Route path="starshare" element={<StarShare />} />
+          <Route path="/starshare/:id" element={<StShrDetail />} />
+          <Route path="stshrmodal" element={<StShrModal />} />
+</Route>
+</Routes>
+</BrowserRouter>
+</QueryClientProvider>
+);
 }
 
 export default App;
+
