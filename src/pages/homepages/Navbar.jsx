@@ -32,6 +32,7 @@ const navigate = useNavigate();
 
   const logout = () => {
     Cookies.remove('token');
+    Cookies.remove('userId');
     navigate('/');
   };
 
@@ -76,7 +77,7 @@ const navigate = useNavigate();
         }}>
           {isLoggedIn ? (
             <>
-              <a style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }} onClick={navigateToMyPage}>마이페이지</a>
+              {/* <a style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }} onClick={navigateToMyPage}>마이페이지</a> */}
               <a style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }} onClick={navigateToStarHub}>스타허브</a>
               <a style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }} onClick={navigateToStarShare}>스타쉐어</a>
               <a style={{ textDecoration: 'none', color: 'black', cursor: 'pointer' }} onClick={logout}>로그아웃</a>

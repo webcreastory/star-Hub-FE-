@@ -3,15 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../../api/api';
 import styled from 'styled-components';
 import StHubDetail from './StHubDetail';
-
 function StarHub() {
     const Navigate = useNavigate();
     const location = useLocation();
     const [datas, setDatas] = useState(null);
-
     // StarBoard에서 전달된 값들을 받기
     const inputValue = location.state?.inputValue || {};
-
     // StarHub 컴포넌트에서
     const updateStarBoardData = (updatedItem) => {
         setDatas((prevDatas) => {
@@ -19,12 +16,10 @@ function StarHub() {
             return updatedDatas;
         });
     };
-
     // StHubDetail 컴포넌트로 콜백 함수를 전달합니다.
     const handleUpdateStarBoardData = (updatedItem) => {
         updateStarBoardData(updatedItem);
     };
-
     const starHubValue = async () => {
         try {
             const { data } = await api.get(`/starboards`);
@@ -33,7 +28,6 @@ function StarHub() {
             console.error('Error fetching data:', error);
         }
     };
-
     useEffect(() => {
         // inputValue가 변경되었을 때만 데이터를 로드
         if (inputValue && inputValue.id) {
@@ -43,7 +37,6 @@ function StarHub() {
             starHubValue();
         }
     }, [inputValue]);
-
     return (
         <>
             <StarHubMainForm>
@@ -61,14 +54,12 @@ function StarHub() {
                         </StarHubHeaderButton>
                     </div>
                 </StarHubHeader>
-
                 <StarHubContainer>
                     {datas?.map((item, index) => {
                         const isDuplicate = datas.findIndex((i) => i.id === item.id) !== index;
                         if (isDuplicate) {
                             return null; // 중복된 경우 렌더링을 건너뜁니다.
                         }
-
                         return (
                             <StBox
                                 key={index}
@@ -97,7 +88,6 @@ const StarHubMainForm = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     margin-top: 20px;
 `;
 // StarHubHeader
@@ -106,14 +96,12 @@ const StarHubHeader = styled.div`
     flex-direction: column;
     justify-content: center;
     text-align: center;
-
     width: 100%;
 `;
 const StarHubHeaderH1 = styled.div`
     font-size: 30px;
     font-weight: 700;
 `;
-
 const StarHubHeaderH2 = styled.div`
     font-size: 14px;
     font-weight: 500;
@@ -122,7 +110,6 @@ const StarHubHeaderLine = styled.hr`
     width: 100%;
     border: none;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-
     margin-top: 30px;
 `;
 // header button
@@ -132,11 +119,9 @@ const StarHubHeaderButton = styled.button`
     background-color: white;
     border: 2px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-
     font-size: 14px;
     font-weight: 500;
     margin-top: 10px;
-
     cursor: pointer;
 `;
 // Container
@@ -144,7 +129,6 @@ const StarHubContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-
     margin-top: 20px;
     padding-left: 55px;
 `;
@@ -177,13 +161,11 @@ const StarHubBoxtextH2 = styled.div`
     font-size: 14px;
     font-weight: 500;
 `;
-
 // =====================================
 // export const HomeContainer = styled.div`
 //     width: 1200px;
 //     margin: 0px auto 0px auto;
 // `;
-
 // export const StDiv1 = styled.div`
 //     height: 70vh;
 //     display: flex;
@@ -221,5 +203,4 @@ const StarHubBoxtextH2 = styled.div`
 //     font-size: 16px;
 //     font-weight: 600;
 // `;
-
 export default StarHub;
